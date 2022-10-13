@@ -1,6 +1,6 @@
 # Author：woldcn
 # Create Time：2022/10/4 16:44
-# Description：
+# Description：all args set here.
 
 class predicotr_args:
     device = 'cuda'
