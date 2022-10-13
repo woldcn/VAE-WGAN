@@ -5,10 +5,10 @@
 class predicotr_args:
     device = 'cuda'
     rand_seed = 42
-    file = r'E:\lian_paper\VAE-WGAN\data\predictor\fluorescence\fluorescence_train.json'
-    train_path = r'E:\lian_paper\VAE-WGAN\data\predictor\fluorescence\fluorescence_train.json'
-    valid_path = r'E:\lian_paper\VAE-WGAN\data\predictor\fluorescence\fluorescence_valid.json'
-    test_path = r'E:\lian_paper\VAE-WGAN\data\predictor\fluorescence\fluorescence_test.json'
+    file = 'data/predictor/fluorescence/fluorescence_train.json'
+    train_path = 'data/predictor/fluorescence/fluorescence_train.json'
+    valid_path = 'data/predictor/fluorescence/fluorescence_valid.json'
+    test_path = 'data/predictor/fluorescence/fluorescence_test.json'
     shuffle = False
     percent_train = 0.6
     percent_valid = 0.2
