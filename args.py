@@ -20,8 +20,8 @@ class PredictorArgs:
     lr = 0.001
     wd = 0.01
     dropout = 0.3
-    save = './ouput/predictor/model/predictor.pth'
-    result = './ouput/predictor/result/result.txt'
+    save = './output/predictor/model/predictor.pth'
+    result = './output/predictor/result/result.txt'
 
 
 class TvaeArgs:
@@ -37,8 +37,8 @@ class TvaeArgs:
     batch_size = 1000
     lr = 0.001
     wd = 0.01
-    save = './ouput/tvae/model/tvae.pth'
-    result = './ouput/tvae/result/result.txt'
+    save = './output/tvae/model/tvae.pth'
+    result = './output/tvae/result/result.txt'
 
 
 predictor_args = PredictorArgs()
