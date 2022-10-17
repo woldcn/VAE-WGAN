@@ -4,10 +4,37 @@
 
 import json
 from torch.utils.data import DataLoader
-from dataset import Protein_dataset
+from utils.dataset import Protein_dataset
 
 
-# get data by file
+# get tvae data
+# tvae model only has train data
+def get_tvae_data(path, batch_size, shuffle):
+    max_seq_len = 0
+    train_seqs = []
+    train_labels = []
+    # get train seqs and labels
+    with open(path, 'r') as f:
+        json_data = json.load(f)
+        # calc max_seq_len
+        for item in json_data:
+            seq_len = item['protein_length']
+            max_seq_len = max(max_seq_len, seq_len)
+        for item in json_data:
+            train_seqs.append(str2num(item['primary'], max_seq_len))
+            train_labels.append(item['log_fluorescence'][0])
+
+    print("train dataset length: {}".format(len(train_labels)))
+    print("max_seq_len: {}\n".format(max_seq_len))
+
+    # transform to Dataset
+    train_data = Protein_dataset(train_seqs, train_labels)
+
+    # transform to DataLoader
+    train_loader = DataLoader(dataset=train_data, batch_size=batch_size, shuffle=shuffle)
+    return train_loader, max_seq_len
+
+# get predictor data by file
 def get_data_by_file(train_path, valid_path, test_path, batch_size, shuffle=False):
     max_seq_len = 0
     train_seqs = []
@@ -66,7 +93,7 @@ def get_data_by_file(train_path, valid_path, test_path, batch_size, shuffle=Fals
     return train_loader, valid_loader, test_loader, max_seq_len
 
 
-# get data by percent
+# get predictor data by percent
 def get_data_by_percent(path, percent_train, percent_valid, percent_test, batch_size, shuffle=False):
     with open(path, 'r') as f:
         json_data = json.load(f)
