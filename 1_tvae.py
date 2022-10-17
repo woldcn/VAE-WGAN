@@ -1,23 +1,24 @@
 # Author：woldcn
 # Create Time：2022/10/4 16:44
 # Description：tvae runnable file.
+import os
 
 from args import tvae_args as cf
 from utils.dataloader import get_tvae_data
 from models.TVAE import TVAE
 import torch
 from torch import optim
-from datetime import datetime
-
+from utils.pic import plt_single_line
+from utils.log import Log
 
 def main():
-    # print args
-    for arg in dir(cf):
-        if arg[0] != '_':
-            print('{}: {}'.format(arg, getattr(cf, arg)))
+    # init Log class
+    log = Log(cf.log, cf)
 
     # 1. load data
-    train_loader, max_seq_len = get_tvae_data(cf.file, cf.batch_size, cf.shuffle)
+    train_loader, max_seq_len, length_train_dataset = get_tvae_data(cf.file, cf.batch_size, cf.shuffle)
+    log.print("train dataset length: {}".format(length_train_dataset))
+    log.print("max_seq_len: {}\n".format(max_seq_len))
 
     # 2. load model, optimizer, criterion
     torch.manual_seed(cf.rand_seed)  # fix rand_seed
@@ -26,10 +27,9 @@ def main():
     optimizer = optim.Adam(model.parameters(), lr=cf.lr, weight_decay=cf.wd)
 
     # 3. train
-    min_loss = 0
-    min_loss_epoch = 0
+    loss_list = []
     for epoch in range(cf.epochs):
-        loss = 0.0
+        loss = 0
         # 3.1 train
         for batch in train_loader:
             inputs, _ = batch
@@ -43,20 +43,18 @@ def main():
             optimizer.step()
             loss += loss.data.item()
         loss /= len(train_loader)
+        loss_list.append(loss.cpu().detach().numpy())
 
-        print(
-            'Epoch: {}, loss: {:.4f}, train loss: {:.4f}, valid pcc: {:.4f}, valid loss: {:.4f}, test pcc: {:.4f}, test loss: {:.4f}'.format(
-                epoch, loss))
+        log.print('Epoch: {}, loss: {:.4f}'.format(epoch, loss))
 
-        # save model
-        if loss < min_loss:
-            min_loss = loss
-            min_loss_epoch = epoch
-            torch.save(model, cf.save)
-    print('=====================min_loss: {}, at epoch: {}\n\n'.format(min_loss, min_loss_epoch))
+    # save model
+    torch.save(model, cf.save)
+    log.save()
+    # painting picture
+    plt_single_line(loss_list[1:], cf.loss_pic, label_x='epoch', label_y='loss', title='TVAE Train Loss')
 
 
 if __name__ == '__main__':
-    print('.' * 50 + ' {}'.format(datetime.now().strftime("%Y-%m-%d %H:%M ")) + '.' * 50)
     main()
-    print('.' * 50 + ' {}'.format(datetime.now().strftime("%Y-%m-%d %H:%M ")) + '.' * 50)
+
+
