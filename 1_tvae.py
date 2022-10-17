@@ -8,6 +8,7 @@ from models.TVAE import TVAE
 import torch
 from torch import optim
 from datetime import datetime
+from utils.pic import plt_single_line
 
 
 def main():
@@ -57,6 +58,7 @@ def main():
     # save model
     torch.save(model, cf.save)
     print('=====================min_loss: {}, at epoch: {}\n\n'.format(min_loss, min_loss_epoch))
+    plt_single_line(loss_list, cf.loss_pic, label_x='epoch', label_y='loss', title='TVAE Train Loss')
 
 
 if __name__ == '__main__':

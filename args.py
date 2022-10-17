@@ -38,7 +38,8 @@ class TvaeArgs:
     lr = 0.001
     wd = 0.01
     save = './output/tvae/model/tvae.pth'
-    result = './output/tvae/result/result.txt'
+    result = './output/tvae/result/loss.txt'
+    loss_pic = './output/tvae/result/loss.png'
 
 
 predictor_args = PredictorArgs()
