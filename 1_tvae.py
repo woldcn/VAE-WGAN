@@ -26,10 +26,11 @@ def main():
     optimizer = optim.Adam(model.parameters(), lr=cf.lr, weight_decay=cf.wd)
 
     # 3. train
-    min_loss = 0
+    min_loss = 1 << 32
     min_loss_epoch = 0
     for epoch in range(cf.epochs):
-        loss = 0.0
+        loss = 0
+        loss_list = []
         # 3.1 train
         for batch in train_loader:
             inputs, _ = batch
@@ -43,16 +44,18 @@ def main():
             optimizer.step()
             loss += loss.data.item()
         loss /= len(train_loader)
+        loss_list.append(loss)
 
         print(
-            'Epoch: {}, loss: {:.4f}, train loss: {:.4f}, valid pcc: {:.4f}, valid loss: {:.4f}, test pcc: {:.4f}, test loss: {:.4f}'.format(
-                epoch, loss))
+            'Epoch: {}, loss: {:.4f}'.format(epoch, loss))
 
         # save model
-        if loss < min_loss:
-            min_loss = loss
-            min_loss_epoch = epoch
-            torch.save(model, cf.save)
+        # if loss < min_loss:
+        #     min_loss = loss
+        #     min_loss_epoch = epoch
+        #     torch.save(model, cf.save)
+    # save model
+    torch.save(model, cf.save)
     print('=====================min_loss: {}, at epoch: {}\n\n'.format(min_loss, min_loss_epoch))
 
 

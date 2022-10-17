@@ -25,7 +25,7 @@ class PredictorArgs:
 
 
 class TvaeArgs:
-    device = 'cpu'
+    device = 'cuda'
     rand_seed = 42
     file = 'data/predictor/fluorescence/fluorescence_train.json'
     shuffle = False
@@ -33,8 +33,8 @@ class TvaeArgs:
     hidden_dim = 100
     num_channels = [1, 100]
     latent_dim = 3
-    epochs = 500
-    batch_size = 10
+    epochs = 100
+    batch_size = 1000
     lr = 0.001
     wd = 0.01
     save = './ouput/tvae/model/tvae.pth'
