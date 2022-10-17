@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 
 
-def single_line(data, save_path, label_x='', label_y='', title=''):
+def plt_single_line(data, save_path, label_x='', label_y='', title=''):
     plt.plot(data)
     plt.xlabel(label_x)
     plt.ylabel(label_y)
