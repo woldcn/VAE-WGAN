@@ -32,8 +32,10 @@ def main():
     optimizer = optim.Adam(model.parameters(), lr=cf.lr, weight_decay=cf.wd)
     criterion = nn.MSELoss()
 
+
+    # 3. train, valid, test
     max_valid_pcc = 0
-    # 3. train and valid
+    max_pcc_epoch = 0
     for epoch in range(cf.epochs):
         train_loss = valid_loss = test_loss = 0.0
         train_pcc = valid_pcc = test_pcc = 0.0
@@ -76,40 +78,24 @@ def main():
             test_pcc += np.corrcoef(outputs.cpu().detach().numpy(), targets.cpu().detach().numpy())[0][1]
         test_loss /= len(test_loader)
         test_pcc /= len(test_loader)
+
         print(
             'Epoch: {}, train pcc: {:.4f}, train loss: {:.4f}, valid pcc: {:.4f}, valid loss: {:.4f}, test pcc: {:.4f}, test loss: {:.4f}'.format(
                 epoch, train_pcc, train_loss, valid_pcc, valid_loss, test_pcc, test_loss))
 
         max_valid_pcc = max(max_valid_pcc, valid_pcc)
-    print('=====================max_valid_pcc: {}\n\n'.format(max_valid_pcc))
-    return max_valid_pcc
-    # 4. valid
-    # 5. test
+        # save model
+        if valid_pcc > max_valid_pcc:
+            max_valid_pcc = valid_pcc
+            max_pcc_epoch = epoch
+            torch.save(model, cf.save)
+    print('=====================max_valid_pcc: {}, at epoch: {}\n\n'.format(max_valid_pcc, max_pcc_epoch))
 
 
 if __name__ == '__main__':
     print('.' * 50 + ' {}'.format(datetime.now().strftime("%Y-%m-%d %H:%M ")) + '.' * 50)
-    # for arg in dir(cf):
-    #     if arg[0] != '_':
-    #         print('{}: {}'.format(arg, getattr(cf, arg)))
-    lr_list = [0.001]
-    wd_list = [1e-9]  # lr: 0.001    wd: 1e-09   dropout: 0    pcc=0.6757
-    droupout_list = [0]
-    max_pcc = 0
-    max_lr = ''
-    max_wd = ''
-    max_drouptout = ''
-    for i in lr_list:
-        cf.lr = i
-        for j in wd_list:
-            cf.wd = j
-            for k in droupout_list:
-                cf.dropout = k
-                pcc = main()
-                if pcc > max_pcc:
-                    max_pcc = pcc
-                    max_lr = i
-                    max_wd = j
-                    max_drouptout = k
-    print('*****max_pcc: {}, lr: {}, wd: {}, droupout: {} \n'.format(max_pcc, max_lr, max_wd, max_drouptout))
+    for arg in dir(cf):
+        if arg[0] != '_':
+            print('{}: {}'.format(arg, getattr(cf, arg)))
+    main()
     print('.' * 50 + ' {}'.format(datetime.now().strftime("%Y-%m-%d %H:%M ")) + '.' * 50)

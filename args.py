@@ -3,7 +3,7 @@
 # Description：all args set here.
 
 class predicotr_args:
-    device = 'cuda'
+    device = 'cpu'
     rand_seed = 42
     file = 'data/predictor/fluorescence/fluorescence_train.json'
     train_path = 'data/predictor/fluorescence/fluorescence_train.json'
@@ -19,7 +19,7 @@ class predicotr_args:
     lr = 0.001
     wd = 0.01
     dropout = 0.3
-    model_path = './ouput/predictor/model/predictor.pth'
-    model_result = './ouput/predictor/result/result.txt'
+    save = './ouput/predictor/model/predictor.pth'
+    result = './ouput/predictor/result/result.txt'
 
 predicotr_args = predicotr_args()
