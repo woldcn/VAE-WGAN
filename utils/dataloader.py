@@ -24,15 +24,12 @@ def get_tvae_data(path, batch_size, shuffle):
             train_seqs.append(str2num(item['primary'], max_seq_len))
             train_labels.append(item['log_fluorescence'][0])
 
-    print("train dataset length: {}".format(len(train_labels)))
-    print("max_seq_len: {}\n".format(max_seq_len))
-
     # transform to Dataset
     train_data = Protein_dataset(train_seqs, train_labels)
 
     # transform to DataLoader
     train_loader = DataLoader(dataset=train_data, batch_size=batch_size, shuffle=shuffle)
-    return train_loader, max_seq_len
+    return train_loader, max_seq_len, len(train_labels)
 
 # get predictor data by file
 def get_data_by_file(train_path, valid_path, test_path, batch_size, shuffle=False):

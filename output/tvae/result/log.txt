@@ -1,0 +1,121 @@
+.................................................. 2022-10-17 17:22 ..................................................
+batch_size: 1000
+device: cuda
+epochs: 100
+file: data/predictor/fluorescence/fluorescence_train.json
+hidden_dim: 100
+input_dim: 1
+latent_dim: 3
+log: ./output/tvae/result/log.txt
+loss_pic: ./output/tvae/result/loss.png
+lr: 0.001
+num_channels: [1, 100]
+rand_seed: 42
+save: ./output/tvae/model/tvae.pth
+shuffle: False
+wd: 0.01
+train dataset length: 21446
+max_seq_len: 237
+
+Epoch: 0, loss: 1491.1765
+Epoch: 1, loss: 116.7151
+Epoch: 2, loss: 52.0159
+Epoch: 3, loss: 36.8129
+Epoch: 4, loss: 28.9171
+Epoch: 5, loss: 23.5000
+Epoch: 6, loss: 19.5032
+Epoch: 7, loss: 16.5432
+Epoch: 8, loss: 14.2241
+Epoch: 9, loss: 12.3838
+Epoch: 10, loss: 10.8648
+Epoch: 11, loss: 9.6641
+Epoch: 12, loss: 8.6443
+Epoch: 13, loss: 7.7996
+Epoch: 14, loss: 7.0577
+Epoch: 15, loss: 6.4557
+Epoch: 16, loss: 5.9055
+Epoch: 17, loss: 5.4414
+Epoch: 18, loss: 5.0262
+Epoch: 19, loss: 4.6615
+Epoch: 20, loss: 4.3349
+Epoch: 21, loss: 4.0398
+Epoch: 22, loss: 3.7707
+Epoch: 23, loss: 3.5515
+Epoch: 24, loss: 3.3327
+Epoch: 25, loss: 3.1426
+Epoch: 26, loss: 2.9607
+Epoch: 27, loss: 2.8010
+Epoch: 28, loss: 2.6547
+Epoch: 29, loss: 2.5228
+Epoch: 30, loss: 2.3967
+Epoch: 31, loss: 2.2793
+Epoch: 32, loss: 2.1742
+Epoch: 33, loss: 2.0695
+Epoch: 34, loss: 1.9807
+Epoch: 35, loss: 1.8958
+Epoch: 36, loss: 1.8106
+Epoch: 37, loss: 1.7387
+Epoch: 38, loss: 1.6696
+Epoch: 39, loss: 1.6030
+Epoch: 40, loss: 1.5415
+Epoch: 41, loss: 1.4781
+Epoch: 42, loss: 1.4257
+Epoch: 43, loss: 1.3724
+Epoch: 44, loss: 1.3249
+Epoch: 45, loss: 1.2775
+Epoch: 46, loss: 1.2292
+Epoch: 47, loss: 1.1904
+Epoch: 48, loss: 1.1516
+Epoch: 49, loss: 1.1124
+Epoch: 50, loss: 1.0736
+Epoch: 51, loss: 1.0438
+Epoch: 52, loss: 1.0107
+Epoch: 53, loss: 0.9840
+Epoch: 54, loss: 0.9502
+Epoch: 55, loss: 0.9225
+Epoch: 56, loss: 0.8942
+Epoch: 57, loss: 0.8711
+Epoch: 58, loss: 0.8417
+Epoch: 59, loss: 0.8184
+Epoch: 60, loss: 0.7961
+Epoch: 61, loss: 0.7742
+Epoch: 62, loss: 0.7550
+Epoch: 63, loss: 0.7331
+Epoch: 64, loss: 0.7167
+Epoch: 65, loss: 0.6959
+Epoch: 66, loss: 0.6777
+Epoch: 67, loss: 0.6608
+Epoch: 68, loss: 0.6443
+Epoch: 69, loss: 0.6285
+Epoch: 70, loss: 0.6132
+Epoch: 71, loss: 0.5996
+Epoch: 72, loss: 0.5838
+Epoch: 73, loss: 0.5683
+Epoch: 74, loss: 0.5567
+Epoch: 75, loss: 0.5435
+Epoch: 76, loss: 0.5327
+Epoch: 77, loss: 0.5192
+Epoch: 78, loss: 0.5078
+Epoch: 79, loss: 0.4957
+Epoch: 80, loss: 0.4846
+Epoch: 81, loss: 0.4753
+Epoch: 82, loss: 0.4642
+Epoch: 83, loss: 0.4544
+Epoch: 84, loss: 0.4441
+Epoch: 85, loss: 0.4358
+Epoch: 86, loss: 0.4253
+Epoch: 87, loss: 0.4174
+Epoch: 88, loss: 0.4084
+Epoch: 89, loss: 0.3997
+Epoch: 90, loss: 0.3920
+Epoch: 91, loss: 0.3838
+Epoch: 92, loss: 0.3759
+Epoch: 93, loss: 0.3683
+Epoch: 94, loss: 0.3612
+Epoch: 95, loss: 0.3541
+Epoch: 96, loss: 0.3475
+Epoch: 97, loss: 0.3402
+Epoch: 98, loss: 0.3334
+Epoch: 99, loss: 0.3274
+.................................................. 2022-10-17 17:27 ..................................................
+

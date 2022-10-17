@@ -38,7 +38,7 @@ class TvaeArgs:
     lr = 0.001
     wd = 0.01
     save = './output/tvae/model/tvae.pth'
-    result = './output/tvae/result/loss.txt'
+    log = './output/tvae/result/log.txt'
     loss_pic = './output/tvae/result/loss.png'
 
 
