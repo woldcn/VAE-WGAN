@@ -2,7 +2,7 @@
 # Create Time：2022/10/4 16:59
 # Description：predictor runnable file.
 
-from args import predicotr_args as cf
+from args import predictor_args as cf
 from utils.dataloader import get_data_by_file
 from utils.dataloader import get_data_by_percent
 from models.GRU import GRU
@@ -14,6 +14,7 @@ from datetime import datetime
 
 
 def main():
+    # print args
     for arg in dir(cf):
         if arg[0] != '_':
             print('{}: {}'.format(arg, getattr(cf, arg)))
@@ -40,7 +41,7 @@ def main():
         train_loss = valid_loss = test_loss = 0.0
         train_pcc = valid_pcc = test_pcc = 0.0
 
-        # train
+        # 3.1 train
         for batch in train_loader:
             inputs, targets = batch
             inputs = inputs.to(cf.device)
@@ -55,7 +56,7 @@ def main():
         train_loss /= len(train_loader)
         train_pcc /= len(train_loader)
 
-        # valid
+        # 3.2 valid
         for batch in valid_loader:
             inputs, targets = batch
             inputs = inputs.to(cf.device)
@@ -67,7 +68,7 @@ def main():
         valid_loss /= len(valid_loader)
         valid_pcc /= len(valid_loader)
 
-        # test
+        # 3.3 test
         for batch in test_loader:
             inputs, targets = batch
             inputs = inputs.to(cf.device)
@@ -83,7 +84,6 @@ def main():
             'Epoch: {}, train pcc: {:.4f}, train loss: {:.4f}, valid pcc: {:.4f}, valid loss: {:.4f}, test pcc: {:.4f}, test loss: {:.4f}'.format(
                 epoch, train_pcc, train_loss, valid_pcc, valid_loss, test_pcc, test_loss))
 
-        max_valid_pcc = max(max_valid_pcc, valid_pcc)
         # save model
         if valid_pcc > max_valid_pcc:
             max_valid_pcc = valid_pcc
@@ -94,8 +94,5 @@ def main():
 
 if __name__ == '__main__':
     print('.' * 50 + ' {}'.format(datetime.now().strftime("%Y-%m-%d %H:%M ")) + '.' * 50)
-    for arg in dir(cf):
-        if arg[0] != '_':
-            print('{}: {}'.format(arg, getattr(cf, arg)))
     main()
     print('.' * 50 + ' {}'.format(datetime.now().strftime("%Y-%m-%d %H:%M ")) + '.' * 50)

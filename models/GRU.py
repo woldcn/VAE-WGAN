@@ -1,8 +1,7 @@
 # Author：woldcn
 # Create Time：2022/10/4 21:18
-# Description：GRU model definition.
+# Description：Gated Recurrent Unit model definition.
 
-import torch
 import torch.nn as nn
 
 class GRU(nn.Module):
@@ -16,8 +15,8 @@ class GRU(nn.Module):
         # self.fnn1 = nn.Linear(input_dim, 50)
         # self.fnn2 = nn.Linear(50, 1)
 
-    def forward(self, x):
-        x = self.embedding(x)
+    def forward(self, x):   # x: torch.Size([1000, 237])
+        x = self.embedding(x)   # x: torch.Size([1000, 237, 100])
         x, h = self.gru(x)
         x = x.reshape(x.shape[0], -1)
         x = self.linear(x)

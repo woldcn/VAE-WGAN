@@ -2,8 +2,9 @@
 # Create Time：2022/10/4 16:44
 # Description：all args set here.
 
-class predicotr_args:
-    device = 'cpu'
+
+class PredictorArgs:
+    device = 'cuda'
     rand_seed = 42
     file = 'data/predictor/fluorescence/fluorescence_train.json'
     train_path = 'data/predictor/fluorescence/fluorescence_train.json'
@@ -15,11 +16,30 @@ class predicotr_args:
     percent_test = 0.2
     hidden_dim = 100
     epochs = 500
-    batch_size = 1000 #32200  #32168
+    batch_size = 1000  # 32200  #32168
     lr = 0.001
     wd = 0.01
     dropout = 0.3
     save = './ouput/predictor/model/predictor.pth'
     result = './ouput/predictor/result/result.txt'
 
-predicotr_args = predicotr_args()
+
+class TvaeArgs:
+    device = 'cpu'
+    rand_seed = 42
+    file = 'data/predictor/fluorescence/fluorescence_train.json'
+    shuffle = False
+    input_dim = 1
+    hidden_dim = 100
+    num_channels = [1, 100]
+    latent_dim = 3
+    epochs = 500
+    batch_size = 10
+    lr = 0.001
+    wd = 0.01
+    save = './ouput/tvae/model/tvae.pth'
+    result = './ouput/tvae/result/result.txt'
+
+
+predictor_args = PredictorArgs()
+tvae_args = TvaeArgs()

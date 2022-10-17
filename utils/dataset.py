@@ -1,6 +1,6 @@
 # Author：woldcn
 # Create Time：2022/10/4 20:27
-# Description：
+# Description：implement Dataset class.
 
 import torch
 from torch.utils.data import Dataset
