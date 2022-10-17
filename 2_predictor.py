@@ -14,6 +14,7 @@ from datetime import datetime
 
 
 def main():
+    # print args
     for arg in dir(cf):
         if arg[0] != '_':
             print('{}: {}'.format(arg, getattr(cf, arg)))
@@ -94,8 +95,5 @@ def main():
 
 if __name__ == '__main__':
     print('.' * 50 + ' {}'.format(datetime.now().strftime("%Y-%m-%d %H:%M ")) + '.' * 50)
-    for arg in dir(cf):
-        if arg[0] != '_':
-            print('{}: {}'.format(arg, getattr(cf, arg)))
     main()
     print('.' * 50 + ' {}'.format(datetime.now().strftime("%Y-%m-%d %H:%M ")) + '.' * 50)
