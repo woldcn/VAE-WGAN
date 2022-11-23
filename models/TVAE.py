@@ -25,6 +25,7 @@ class TVAE(nn.Module):
         x = x.reshape(x.shape[0], x.shape[1], 1)
         x = self.encoder_tcn(x)
         x = torch.sigmoid(x)
+        print(x.shape)
         mu = self.mu(x)
         mu = torch.sigmoid(mu)
         log_sigma = self.log_sigma(x)
