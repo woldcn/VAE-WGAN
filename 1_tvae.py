@@ -1,7 +1,6 @@
 # Author：woldcn
 # Create Time：2022/10/4 16:44
 # Description：tvae runnable file.
-import os
 
 from args import tvae_args as cf
 from utils.dataloader import get_tvae_data
